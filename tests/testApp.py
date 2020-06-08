@@ -41,3 +41,6 @@ class TestApp(unittest.TestCase):
         self.assertTrue("200 OK".lower() in output1.decode('UTF-8').lower())
         self.assertTrue("200 OK".lower() in output2.decode("UTF-8").lower())
         self.assertTrue("404 NOT FOUND".lower() in output3.decode("UTF-8").lower())
+
+if __name__ == "__main__":
+    unittest.main()
