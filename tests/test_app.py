@@ -19,8 +19,7 @@ class TestApp(unittest.TestCase):
             result_of_check = a_socket.connect_ex(('localhost', 5000))
             if result_of_check == 0:
                 cls.server_running = True
-                return
-        raise Exception("Unable to start server on PORT 5000")      
+                return  
 
     @classmethod
     def tearDownClass(cls):
