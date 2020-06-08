@@ -13,7 +13,7 @@ class TestApp(unittest.TestCase):
         cls.proc = subprocess.Popen(["python3", "app.py"])
         a_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         start = time.time()
-        while (time.time() - start) < 5: # timeout after 5 seconds
+        while (time.time() - start) < 10: # timeout after 10 seconds
             result_of_check = a_socket.connect_ex(('localhost', 5000))
             if result_of_check == 0:
                 return
