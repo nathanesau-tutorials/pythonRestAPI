@@ -32,29 +32,29 @@ class TestApp(unittest.TestCase):
 
     def test_get_task(self):
         output1 = self.run_curl_command("curl -u nathan:python -i http://localhost:5000/todo/api/v1.0/tasks/1")
-        output2 = self.run_curl_command("curl -u nathan:python-i http://localhost:5000/todo/api/v1.0/tasks/2")
-        output3 = self.run_curl_command("curl -u nathan:python-i http://localhost:5000/todo/api/v1.0/tasks/123456") # DNE
+        output2 = self.run_curl_command("curl -u nathan:python -i http://localhost:5000/todo/api/v1.0/tasks/2")
+        output3 = self.run_curl_command("curl -u nathan:python -i http://localhost:5000/todo/api/v1.0/tasks/123456") # DNE
         self.assertTrue("200 OK".lower() in output1.decode('UTF-8').lower())
         self.assertTrue("200 OK".lower() in output2.decode("UTF-8").lower())
         self.assertTrue("404 NOT FOUND".lower() in output3.decode("UTF-8").lower())
 
     def test_create_task(self):
-        output = self.run_curl_command("curl -i -H \"Content-Type: application/json\" -X POST -d '{\"title\": \"Read a book\"}' http://localhost:5000/todo/api/v1.0/tasks")
+        output = self.run_curl_command("curl -u nathan:python -i -H \"Content-Type: application/json\" -X POST -d '{\"title\": \"Read a book\"}' http://localhost:5000/todo/api/v1.0/tasks")
         self.assertTrue("201 CREATED".lower() in output.decode("UTF-8").lower())
 
         # cleanup (delete created task)
-        self.run_curl_command("curl -i H \"Content-Type: application/json\" -X DELETE http://localhost:5000/todo/api/v1.0/tasks/3")
+        self.run_curl_command("curl -u nathan:python -i H \"Content-Type: application/json\" -X DELETE http://localhost:5000/todo/api/v1.0/tasks/3")
 
     def test_update_task(self):
-        output = self.run_curl_command("curl -i -H \"Content-Type: application/json\" -X PUT -d '{\"done\": true}' http://localhost:5000/todo/api/v1.0/tasks/2")
+        output = self.run_curl_command("curl -u nathan:python -i -H \"Content-Type: application/json\" -X PUT -d '{\"done\": true}' http://localhost:5000/todo/api/v1.0/tasks/2")
         self.assertTrue("200 OK".lower() in output.decode("UTF-8").lower())
 
         # cleanup (update task back to how it was)
-        self.run_curl_command("curl -i -H \"Content-Type: application/json\" -X PUT -d '{\"done\": false}' http://localhost:5000/todo/api/v1.0/tasks/2")
+        self.run_curl_command("curl -u nathan:python -i -H \"Content-Type: application/json\" -X PUT -d '{\"done\": false}' http://localhost:5000/todo/api/v1.0/tasks/2")
 
     def test_delete_task(self):
-        self.run_curl_command("curl -i -H \"Content-Type: application/json\" -X POST -d '{\"title\": \"Read a book\"}' http://localhost:5000/todo/api/v1.0/tasks")
-        output = self.run_curl_command("curl -i H \"Content-Type: application/json\" -X DELETE http://localhost:5000/todo/api/v1.0/tasks/3")
+        self.run_curl_command("curl -i -u nathan:python -H \"Content-Type: application/json\" -X POST -d '{\"title\": \"Read a book\"}' http://localhost:5000/todo/api/v1.0/tasks")
+        output = self.run_curl_command("curl -u nathan:python -i H \"Content-Type: application/json\" -X DELETE http://localhost:5000/todo/api/v1.0/tasks/3")
         self.assertTrue("200 OK".lower() in output.decode("UTF-8").lower())
 
 if __name__ == "__main__":

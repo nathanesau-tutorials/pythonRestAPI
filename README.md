@@ -12,5 +12,5 @@ Related link: https://blog.miguelgrinberg.com/post/designing-a-restful-api-with-
 The app is already deployed to Heroku. You can try it out with the following command:
 
 ```
-curl -i https://sleepy-atoll-74150.herokuapp.com/todo/api/v1.0/tasks
+curl -u nathan:python -i https://sleepy-atoll-74150.herokuapp.com/todo/api/v1.0/tasks
 ```
